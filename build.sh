@@ -31,7 +31,7 @@ do
     make $args > compile.log 2>&1
 
     # 检查
-    if [ ! -f bin/targets/$target/$subtarget/packages/kmod-* ]
+    if [ ! -f bin/targets/$target/$subtarget*/packages/kmod-* ]
     then
         echo "here may build failed." > compile.log
     else
