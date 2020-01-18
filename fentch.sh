@@ -27,8 +27,9 @@ do
         for subtarget in $subtargets
         do
             sdk=$(curl -s $base_url$version/targets/$target/$subtarget/ | grep '<tr><td class="n">' | awk '{split($0,b,'"\"\\\"\""');print b[4]}' | grep tar.xz | grep sdk)
-            echo "    sdk:$sdk"
-            echo "$base_url$version/targets/$target/$subtarget/$sdk" >> list.txt
+            sdk=${sdk%.tar.xz}
+            echo "    sdk: $sdk"
+            echo "$version $target $subtarget $sdk $base_url$version/targets/$target/$subtarget/$sdk.tar.xz" >> list.txt
         done
     done
 done
