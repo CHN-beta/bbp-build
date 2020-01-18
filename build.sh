@@ -33,7 +33,7 @@ do
     # 检查
     if [ ! -f bin/targets/$target/$subtarget*/packages/kmod-* ]
     then
-        echo "here may build failed." > compile.log
+        echo "here may build failed. ipk not found." > compile.log
     else
         mkdir test
         cp bin/targets/$target/$subtarget/packages/kmod-* test/
@@ -42,12 +42,12 @@ do
         tar -xf test.tar
         if [ ! -f data.tar.gz ]
         then
-            echo "here may build failed." > compile.log
+            echo "here may build failed. data.tar.gz not found." > compile.log
         else
             tar -xf data.tar.gz
             if [ ! -f lib/modules/*/*.ko ]
             then
-                echo "here may build failed." > compile.log
+                echo "here may build failed. ko not found." > compile.log
             fi
         fi
         cd ..
