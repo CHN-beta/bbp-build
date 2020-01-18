@@ -9,7 +9,7 @@ do
     sdk=$(echo $line | awk '{print $4}')
     url=$(echo $line | awk '{print $5}')
     
-    curl -qO --retry 99 $url
+    curl -sO --retry 99 $url
     tar -xf $sdk.tar.xz
     cd $sdk
     git clone -q https://github.com/CHN-beta/xmurp-ua.git package/xmurp-ua
