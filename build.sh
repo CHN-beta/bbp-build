@@ -27,6 +27,26 @@ do
         cross_compile="$(pwd)/staging_dir/$(ls staging_dir | grep toolchain)/bin/$arch-openwrt-linux-"
         args="$args ARCH=$arch CROSS_COMPILE=$cross_compile"
     fi
+    # mipsel 需要创建软链接
+    if [ "$arch" == "mipsel" ]
+    then
+        if [ ! -d "build_dir/target*/linux*/linux*/arch/$arch" ]
+        then
+            cd build_dir/target*/linux*/linux*/arch
+            ln -s mips mipsel
+            cd ../../../../..
+        fi
+    fi
+    # armeb 也需要
+    if [ "$arch" == "armeb" ]
+    then
+        if [ ! -d "build_dir/target*/linux*/linux*/arch/$arch" ]
+        then
+            cd build_dir/target*/linux*/linux*/arch
+            ln -s arm armeb
+            cd ../../../../..
+        fi
+    fi
 
     # 编译
     echo $args | tee -a ../status.log
