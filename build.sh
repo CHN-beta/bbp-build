@@ -17,6 +17,7 @@ do
     git clone -q https://github.com/CHN-beta/xmurp-ua.git package/xmurp-ua
 
     # 准备编译参数
+    make defconfig >> compile.log 2>&1
     args="package/xmurp-ua/compile V=sc"
     # 17.01.x 以前的需要加参数
     result=$(echo $version | grep 17.01)
@@ -29,7 +30,6 @@ do
 
     # 编译
     echo $args | tee -a ../status.log
-    make defconfig >> compile.log 2>&1
     make $args >> compile.log 2>&1
 
     # 检查
