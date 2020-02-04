@@ -31,6 +31,10 @@ do
             cd build_dir/target*/linux*/linux*/arch
             arch2=$(ls)
             ln -s $arch2 $arch
+            if [ "$arch2" == "arm64" -a ! -d "arm" ]
+            then
+                cp $arch arm
+            fi
             cd ../../../../..
         fi
     fi
