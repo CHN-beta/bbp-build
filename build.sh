@@ -23,7 +23,7 @@ do
     result=$(echo $version | grep 17.01)
     if [ ! -z "$result" ]
     then
-        arch=$(cat .config | grep CONFIG_ARCH | awk '{split($0,b,'"\"\\\"\""');print b[2]}')
+        arch=$(cat .config | grep CONFIG_ARCH= | awk '{split($0,b,'"\"\\\"\""');print b[2]}')
         cross_compile="$(pwd)/staging_dir/$(ls staging_dir | grep toolchain)/bin/$arch-openwrt-linux-"
         args="$args ARCH=$arch CROSS_COMPILE=$cross_compile"
     fi
