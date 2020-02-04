@@ -32,6 +32,12 @@ do
             cd build_dir/target*/linux*/linux*/arch
             arch2=$(ls)
             ln -s $arch2 $arch
+            # 可能会找不到 opcodes.h
+            if [ "$arch2" == "arm64" -a ! -d arm]
+            then
+                mkdir -p arm/include/asm
+                touch arm/include/asm/opcodes.h
+            fi
             cd ../../../../..
         fi
     fi
