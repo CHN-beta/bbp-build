@@ -15,7 +15,6 @@ do
     tar -xf $sdk.tar.xz
     cd $sdk
     git clone -q https://github.com/CHN-beta/xmurp-ua.git package/xmurp-ua
-    make defconfig
 
     # 准备编译参数
     args="package/xmurp-ua/compile V=sc"
@@ -30,7 +29,8 @@ do
 
     # 编译
     echo $args | tee -a ../status.log
-    make $args > compile.log 2>&1
+    make defconfig >> compile.log 2>&1
+    make $args >> compile.log 2>&1
 
     # 检查
     if [ ! -f bin/targets/$target/$subtarget*/packages/kmod-* ]
