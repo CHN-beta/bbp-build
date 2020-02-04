@@ -45,7 +45,7 @@ do
         echo "here may build failed. ipk not found." | tee -a ../status.log
     else
         mkdir test
-        cp bin/targets/$target/$subtarget/packages/kmod-* test/
+        cp bin/targets/$target/$subtarget*/packages/kmod-* test/
         cd test
         mv kmod-* test.tar
         tar -xf test.tar
@@ -65,8 +65,8 @@ do
     # 整理，清理
     echo $line >> ../compile.log
     cat compile.log >> ../compile.log
-    mkdir -p ../bin/$version/$target/$subtarget
-    cp bin/targets/$target/$subtarget/packages/kmod-* ../bin/$version/$target/$subtarget/
+    mkdir -p ../bin/$version
+    cp -r bin/targets/* ../bin/$version/
     cd ..
     rm -rf $sdk*
     
