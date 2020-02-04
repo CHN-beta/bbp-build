@@ -3,7 +3,7 @@
 cat list.txt | while read line
 do
     # 读取参数
-    echo "building $line" | tee -a ../status.log
+    echo "building $line" | tee -a status.log
     version=$(echo $line | awk '{print $1}')
     target=$(echo $line | awk '{print $2}')
     subtarget=$(echo $line | awk '{print $3}')
