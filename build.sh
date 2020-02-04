@@ -26,24 +26,11 @@ do
         arch=$(cat .config | grep CONFIG_ARCH= | awk '{split($0,b,'"\"\\\"\""');print b[2]}')
         cross_compile="$(pwd)/staging_dir/$(ls staging_dir | grep toolchain)/bin/$arch-openwrt-linux-"
         args="$args ARCH=$arch CROSS_COMPILE=$cross_compile"
-    fi
-    # mipsel 需要创建软链接
-    if [ "$arch" == "mipsel" ]
-    then
         if [ ! -d "build_dir/target*/linux*/linux*/arch/$arch" ]
         then
             cd build_dir/target*/linux*/linux*/arch
-            ln -s mips mipsel
-            cd ../../../../..
-        fi
-    fi
-    # armeb 也需要
-    if [ "$arch" == "armeb" ]
-    then
-        if [ ! -d "build_dir/target*/linux*/linux*/arch/$arch" ]
-        then
-            cd build_dir/target*/linux*/linux*/arch
-            ln -s arm armeb
+            arch2=$(ls)
+            ln -s $arch2 $arch
             cd ../../../../..
         fi
     fi
