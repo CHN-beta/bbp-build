@@ -33,7 +33,7 @@ do
             ln -s $arch2 $arch
             if [ "$arch2" == "arm64" -a ! -d "arm" ]
             then
-                cp $arch arm
+                ln -s $arch2 arm
             fi
             cd ../../../../..
         fi
