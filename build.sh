@@ -26,15 +26,12 @@ do
         arch=$(cat .config | grep CONFIG_ARCH= | awk '{split($0,b,'"\"\\\"\""');print b[2]}')
         cross_compile="$(pwd)/staging_dir/$(ls staging_dir | grep toolchain)/bin/$arch-openwrt-linux-"
         args="$args ARCH=$arch CROSS_COMPILE=$cross_compile"
+        # 有时需要增加软链接
         if [ ! -d "build_dir/target*/linux*/linux*/arch/$arch" ]
         then
             cd build_dir/target*/linux*/linux*/arch
             arch2=$(ls)
             ln -s $arch2 $arch
-            if [ "$arch2" == "arm64" -a ! -d "arm" ]
-            then
-                ln -s $arch2 arm
-            fi
             cd ../../../../..
         fi
     fi
